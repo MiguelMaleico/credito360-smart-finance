@@ -27,6 +27,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   });
 
   const login = async (email: string, password: string): Promise<boolean> => {
+    console.log('Tentativa de login:', { email, password });
+    
     // Simulação de login - em produção seria uma chamada para API
     const mockUsers: (User & { password: string })[] = [
       {
@@ -51,17 +53,30 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       }
     ];
 
-    const foundUser = mockUsers.find(u => u.email === email && u.password === password);
+    console.log('Usuários mock:', mockUsers);
+    
+    const foundUser = mockUsers.find(u => {
+      console.log('Comparando:', { userEmail: u.email, inputEmail: email, userPassword: u.password, inputPassword: password });
+      return u.email.toLowerCase() === email.toLowerCase() && u.password === password;
+    });
+    
+    console.log('Usuário encontrado:', foundUser);
+    
     if (foundUser) {
       const { password: _, ...userWithoutPassword } = foundUser;
+      console.log('Login bem-sucedido:', userWithoutPassword);
       setUser(userWithoutPassword);
       localStorage.setItem('user', JSON.stringify(userWithoutPassword));
       return true;
     }
+    
+    console.log('Login falhou - credenciais inválidas');
     return false;
   };
 
   const register = async (userData: Omit<User, 'id'> & { password: string }): Promise<boolean> => {
+    console.log('Tentativa de registro:', userData);
+    
     // Simulação de registro
     const newUser: User = {
       ...userData,
@@ -72,12 +87,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const { password: _, ...userWithoutPassword } = userData;
     const finalUser = { ...userWithoutPassword, id: newUser.id };
     
+    console.log('Registro bem-sucedido:', finalUser);
     setUser(finalUser);
     localStorage.setItem('user', JSON.stringify(finalUser));
     return true;
   };
 
   const logout = () => {
+    console.log('Logout realizado');
     setUser(null);
     localStorage.removeItem('user');
   };
