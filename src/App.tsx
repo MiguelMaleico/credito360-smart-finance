@@ -1,28 +1,36 @@
-
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { Layout } from "@/components/Layout";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 // Pages
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Dashboard from "./pages/Dashboard";
-import Marketplace from "./pages/Marketplace";
-import Simulator from "./pages/Simulator";
-import ConnectBanks from "./pages/ConnectBanks";
-import MyAccount from "./pages/MyAccount";
-import Consent from "./pages/Consent";
-import DataCollection from "./pages/DataCollection";
+import AboutUs from "./pages/AboutUs";
 import Analysis from "./pages/Analysis";
-import PartnerDashboard from "./pages/PartnerDashboard";
+import Careers from "./pages/Careers";
+import ConnectBanks from "./pages/ConnectBanks";
+import Consent from "./pages/Consent";
+import Contact from "./pages/Contact";
 import CreateProposal from "./pages/CreateProposal";
+import Dashboard from "./pages/Dashboard";
+import DataCollection from "./pages/DataCollection";
+import HelpCenter from "./pages/HelpCenter";
+import Home from "./pages/Home";
+import HowItWorks from "./pages/HowItWorks";
+import Login from "./pages/Login";
+import Marketplace from "./pages/Marketplace";
+import MyAccount from "./pages/MyAccount";
 import MyProposals from "./pages/MyProposals";
 import NotFound from "./pages/NotFound";
+import PartnerDashboard from "./pages/PartnerDashboard";
+import Partners from "./pages/Partners";
+import Press from "./pages/Press";
+import Register from "./pages/Register";
+import Security from "./pages/Security";
+import Simulator from "./pages/Simulator";
+import Status from "./pages/Status";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +48,15 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/sobre-nos" element={<AboutUs />} />
+      <Route path="/como-funciona" element={<HowItWorks />} />
+      <Route path="/parceiros" element={<Partners />} />
+      <Route path="/seguranca" element={<Security />} />
+      <Route path="/carreiras" element={<Careers />} />
+      <Route path="/imprensa" element={<Press />} />
+      <Route path="/central-ajuda" element={<HelpCenter />} />
+      <Route path="/contato" element={<Contact />} />
+      <Route path="/status" element={<Status />} />
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
       <Route path="/cadastro" element={<PublicRoute><Register /></PublicRoute>} />
       
